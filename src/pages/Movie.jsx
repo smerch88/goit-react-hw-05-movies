@@ -31,7 +31,7 @@ export const Movie = () => {
   if (!movieDetails) return null;
   return (
     <>
-      <BackLink to={backLinkHref}>Back to products</BackLink>
+      <BackLink to={backLinkHref}>Back</BackLink>
 
       <img
         src={`https://image.tmdb.org/t/p/w200/${movieDetails.poster_path}`}
