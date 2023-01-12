@@ -1,3 +1,4 @@
+import { Ul } from 'pages/Home.styled';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchMovieDetails } from 'services/api';
@@ -29,7 +30,7 @@ export const Reviews = () => {
   if (!reviews) return null;
   return (
     <>
-      <ul>
+      <Ul>
         {reviews.results.map(item => {
           return (
             <li key={item.id}>
@@ -39,7 +40,7 @@ export const Reviews = () => {
             </li>
           );
         })}
-      </ul>
+      </Ul>
     </>
   );
 };

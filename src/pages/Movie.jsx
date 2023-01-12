@@ -2,6 +2,7 @@ import { BackLink } from 'components/BackLink';
 import { useEffect, useState } from 'react';
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 import { fetchMovieDetails } from 'services/api';
+import { StyledLink, Ul } from './Home.styled';
 
 export const Movie = () => {
   const { movieID } = useParams();
@@ -10,6 +11,7 @@ export const Movie = () => {
   const [isLoading, setIsLoading] = useState(false);
   const location = useLocation();
   const backLinkHref = location.state?.from ?? '/goit-react-hw-05-movies';
+  console.log(location);
 
   useEffect(() => {
     setIsLoading(true);
@@ -32,7 +34,7 @@ export const Movie = () => {
   return (
     <>
       <BackLink to={backLinkHref}>Back</BackLink>
-
+      <br />
       <img
         src={`https://image.tmdb.org/t/p/w200/${movieDetails.poster_path}`}
         alt="movie poster"
@@ -43,21 +45,23 @@ export const Movie = () => {
       <h2>Overview</h2>
       <p>{movieDetails.overview}</p>
       <h2>Genres</h2>
-      <ul>
+      <Ul>
         {movieDetails.genres.map(item => {
           return <li key={item.id}>{item.name}</li>;
         })}
-      </ul>
-      <ul>
+      </Ul>
+      <Ul>
         <li>
-          {' '}
-          <Link to="cast">Cast</Link>
+          <StyledLink to="cast" state={{ from: location.state?.from }}>
+            Cast
+          </StyledLink>
         </li>
         <li>
-          {' '}
-          <Link to="reviews">Reviews</Link>
+          <StyledLink to="reviews" state={{ from: location.state?.from }}>
+            Reviews
+          </StyledLink>
         </li>
-      </ul>
+      </Ul>
       <Outlet />
     </>
   );

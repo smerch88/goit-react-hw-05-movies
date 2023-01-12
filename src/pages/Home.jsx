@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { fetchPopular } from 'services/api';
+import { StyledLink, Ul } from './Home.styled';
 
 export const Home = () => {
   const [trendingFilms, setTrendingFilms] = useState(null);
@@ -27,19 +27,19 @@ export const Home = () => {
   if (!trendingFilms) return null;
   return (
     <>
-      <ul>
+      <Ul>
         {trendingFilms.results.map(item => {
           console.log(item);
           return (
             <li key={item.id}>
-              <Link to={`/goit-react-hw-05-movies/movies/${item.id}`}>
+              <StyledLink to={`/goit-react-hw-05-movies/movies/${item.id}`}>
                 {item?.name}
                 {item?.title}
-              </Link>
+              </StyledLink>
             </li>
           );
         })}
-      </ul>
+      </Ul>
     </>
   );
 };

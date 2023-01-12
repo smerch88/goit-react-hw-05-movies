@@ -1,9 +1,12 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import { fetchSearch } from 'services/api';
+import { StyledLink, Ul } from './Home.styled';
 
 export const Movies = () => {
-  const [query, setQuery] = useState(undefined);
+  const [params, setParams] = useSearchParams();
+  const savedQuery = params.get('movie') ?? '';
+  const [query, setQuery] = useState(savedQuery);
   const [movies, setMovies] = useState(null);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -26,11 +29,11 @@ export const Movies = () => {
 
   const handleSetInputValue = event => {
     setQuery(event.target.value);
+    setParams({ movie: event.target.value });
   };
 
-  if (isLoading) return <p>Loading...</p>;
-  if (error) return <p>{error.message}</p>;
-  if (!movies) return null;
+  const location = useLocation();
+
   return (
     <>
       <input
@@ -41,20 +44,25 @@ export const Movies = () => {
         placeholder="Search Movie..."
         value={query}
       />
+      <br />
+      <br />
       {query && (
-        <ul>
-          {movies.results.map(item => {
+        <Ul>
+          {movies?.results.map(item => {
             console.log(item);
             return (
               <li key={item.id}>
-                <Link to={`/goit-react-hw-05-movies/movies/${item.id}`}>
+                <StyledLink
+                  to={`/goit-react-hw-05-movies/movies/${item.id}`}
+                  state={{ from: location }}
+                >
                   {item?.name}
                   {item?.title}
-                </Link>
+                </StyledLink>
               </li>
             );
           })}
-        </ul>
+        </Ul>
       )}
     </>
   );

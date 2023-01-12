@@ -1,3 +1,4 @@
+import { Ul } from 'pages/Home.styled';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchMovieDetails } from 'services/api';
@@ -29,7 +30,7 @@ export const Cast = () => {
   if (!cast) return null;
   return (
     <>
-      <ul>
+      <Ul>
         {cast.cast.map(item => {
           return (
             <li key={item.id}>
@@ -42,7 +43,7 @@ export const Cast = () => {
             </li>
           );
         })}
-      </ul>
+      </Ul>
     </>
   );
 };
