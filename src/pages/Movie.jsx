@@ -1,6 +1,6 @@
 import { BackLink } from 'components/BackLink';
 import { useEffect, useState } from 'react';
-import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
+import { Outlet, useLocation, useParams } from 'react-router-dom';
 import { fetchMovieDetails } from 'services/api';
 import { StyledLink, Ul } from './Home.styled';
 

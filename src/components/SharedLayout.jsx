@@ -8,7 +8,7 @@ export const SharedLayout = () => {
         <Logo>
           <span role="img" aria-label="computer icon">
             💻
-          </span>{' '}
+          </span>
           Movies Search
         </Logo>
         <nav>
